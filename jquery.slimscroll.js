@@ -214,28 +214,16 @@
             isDragg = true;
             t = parseFloat(bar.css('top'));
             pageY = e.pageY;
-            var iframe = $doc.find('iframe');
-            $doc.bind("mousemove.slimscroll", function (e) {
+
+            $doc.bind("mousemove.slimscroll", function(e){
               currTop = t + e.pageY - pageY;
               bar.css('top', currTop);
               scrollContent(0, bar.position().top, false);// scroll content
             });
 
-            $doc.bind("mouseup.slimscroll", function (e) {
-              isDragg = false; hideBar();
+            $doc.bind("mouseup.slimscroll", function(e) {
+              isDragg = false;hideBar();
               $doc.unbind('.slimscroll');
-              iframe.contents().unbind('.slimscroll');
-            });
-
-            iframe.contents().bind("mousemove.slimscroll", function (e) {
-              currTop = t + e.pageY - pageY + iframe.offset().top;
-              bar.css('top', currTop);
-              scrollContent(0, bar.position().top, false);// scroll content
-            });
-            iframe.contents().bind("mouseup.slimscroll", function (e) {
-              isDragg = false; hideBar();
-              $doc.unbind('.slimscroll');
-              iframe.contents().unbind('.slimscroll');
             });
             return false;
           }).bind("selectstart.slimscroll", function(e){
